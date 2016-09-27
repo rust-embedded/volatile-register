@@ -5,6 +5,10 @@ services: docker
 sudo: required
 
 matrix:
+  exclude:
+    # first, clear the matrix
+    - language: rust
+  # then add the targets one by one
   include:
     - env: TARGET=x86_64-unknown-linux-gnu
     - env: TARGET=thumbv6m-none-eabi
