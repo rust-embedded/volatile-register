@@ -1,0 +1,8 @@
+[package]
+authors = ["Jorge Aparicio <japaricious@gmail.com>"]
+description = "Volatile access to memory mapped hardware registers"
+license = "MIT OR Apache-2.0"
+keywords = ["volatile", "register"]
+name = "volatile-register"
+repository = "https://github.com/japaric/volatile-register"
+version = "0.1.0"
