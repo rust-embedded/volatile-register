@@ -1,5 +1,6 @@
 [package]
 authors = ["Jorge Aparicio <japaricious@gmail.com>"]
+documentation = "https://docs.rs/volatile-register"
 description = "Volatile access to memory mapped hardware registers"
 license = "MIT OR Apache-2.0"
 keywords = ["volatile", "register"]

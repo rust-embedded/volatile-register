@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- Documentation link to Cargo metadata.
+
 ## [v0.1.0] - 2016-09-27
 
 ### Added
