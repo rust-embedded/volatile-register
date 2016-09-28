@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [v0.1.1] - 2016-09-27
+
 ### Added
 
 - Documentation link to Cargo metadata.
@@ -17,4 +19,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Read-Only (`RO`), Read-Write (`RW`) and Write-Only (`WO`) registers
 
-[Unreleased]: https://github.com/japaric/rustc-cfg/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/japaric/rustc-cfg/compare/v0.1.1...HEAD
+[v0.1.1]: https://github.com/japaric/rustc-cfg/compare/v0.1.0...v0.1.1
