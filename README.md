@@ -1,6 +1,6 @@
-[![Build Status][travis]](https://travis-ci.org/japaric/volatile-register)
-
-[travis]: https://travis-ci.org/japaric/volatile-register.svg?branch=master
+[![Build status](https://travis-ci.org/japaric/volatile-register.svg?branch=master)](https://travis-ci.org/japaric/volatile-register)
+[![crates.io](https://img.shields.io/crates/d/volatile-register.svg)](https://crates.io/crates/volatile-register)
+[![crates.io](https://img.shields.io/crates/v/volatile-register.svg)](https://crates.io/crates/volatile-register)
 
 # `volatile-register`
 
