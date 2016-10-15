@@ -78,6 +78,13 @@ impl<T> RW<T>
             ptr::write_volatile(&mut self.register, value);
         }
     }
+
+    /// Perform a read-modify-write, using `func` to perform the modification.
+    pub fn modify<F>(&mut self, func: F) where F: FnOnce(T) -> T {
+        let mut t = self.read();
+        t = func(t);
+        self.write(t);
+    }
 }
 
 /// Write-Only register
