@@ -2,105 +2,103 @@
 //!
 //! # Usage
 //!
-//! ```
-//! use volatile_register::{RO, RW, WO};
+//! ``` no_run
+//! use volatile_register::RW;
 //!
-//! /// A struct that represents the memory mapped register block for the GPIO
-//! /// (General Purpose I/O) peripherals.
+//! // Create a struct that represents the memory mapped register block
+//! /// Nested Vector Interrupt Controller
 //! #[repr(C)]
-//! pub struct Gpio {
-//!     /// Control Register
-//!     cr: RW<u32>,
-//!     /// Input Data Register
-//!     idr: RO<u32>,
-//!     /// Output Data Register
-//!     odr: WO<u32>,
+//! pub struct Nvic {
+//!     /// Interrupt Set-Enable
+//!     pub iser: [RW<u32>; 8],
+//!     reserved0: [u32; 24],
+//!     /// Interrupt Clear-Enable
+//!     pub icer: [RW<u32>; 8],
+//!     reserved1: [u32; 24],
 //!     // .. more registers ..
 //! }
 //!
-//! /// Accessor to the register block associated to the GPIOA peripheral
-//! fn gpioa() -> &'static Gpio {
-//!     const ADDRESS: usize = 0x40010800;
-//!
-//!     unsafe { &*(ADDRESS as *const Gpio) }
-//! }
-//!
-//! /// Accessor to the register block associated to the GPIOC peripheral
-//! /// NOTE(unsafe) This function hands out mutable aliases to a single address.
-//! unsafe fn gpioc_mut() -> &'static mut Gpio {
-//!     const ADDRESS: usize = 0x40011000;
-//!
-//!     unsafe { &mut *(ADDRESS as *mut Gpio) }
-//! }
+//! // Access the registers by casting the base address of the register block
+//! // to the previously declared `struct`
+//! let nvic = 0xE000_E100 as *const Nvic;
+//! // Unsafe because the compiler can't verify the address is correct
+//! unsafe { (*nvic).iser[0].write(1) }
 //! ```
 
 #![deny(missing_docs)]
 #![no_std]
 
-use core::cell::UnsafeCell;
-use core::ptr;
+extern crate vcell;
+
+use vcell::VolatileCell;
 
 /// Read-Only register
-#[repr(C)]
-pub struct RO<T> {
-    register: T,
+pub struct RO<T>
+    where T: Copy
+{
+    register: VolatileCell<T>,
 }
 
 impl<T> RO<T>
     where T: Copy
 {
-    /// Uninterruptible if `T` is a word, halfword or byte
+    /// Reads the value of the register
     #[inline(always)]
     pub fn read(&self) -> T {
-        unsafe { ptr::read_volatile(&self.register) }
+        self.register.get()
     }
 }
 
 /// Read-Write register
-#[repr(C)]
-pub struct RW<T> {
-    register: T,
+pub struct RW<T>
+    where T: Copy
+{
+    register: VolatileCell<T>,
 }
 
 impl<T> RW<T>
     where T: Copy
 {
-    /// Uninterruptible if `T` is a word, halfword or byte
+    /// Performs a read-modify-write operation
+    ///
+    /// NOTE: `unsafe` because writes to a register are side effectful
+    #[inline(always)]
+    pub unsafe fn modify<F>(&self, f: F)
+        where F: FnOnce(T) -> T
+    {
+        self.register.set(f(self.register.get()));
+    }
+
+    /// Reads the value of the register
     #[inline(always)]
     pub fn read(&self) -> T {
-        unsafe { ptr::read_volatile(&self.register) }
+        self.register.get()
     }
 
-    /// Uninterruptible if `T` is a word, halfword or byte
+    /// Writes a `value` into the register
+    ///
+    /// NOTE: `unsafe` because writes to a register are side effectful
     #[inline(always)]
-    pub fn write(&mut self, value: T) {
-        unsafe {
-            ptr::write_volatile(&mut self.register, value);
-        }
-    }
-
-    /// Perform a read-modify-write, using `func` to perform the modification.
-    pub fn modify<F>(&mut self, func: F) where F: FnOnce(T) -> T {
-        let mut t = self.read();
-        t = func(t);
-        self.write(t);
+    pub unsafe fn write(&self, value: T) {
+        self.register.set(value)
     }
 }
 
 /// Write-Only register
-#[repr(C)]
-pub struct WO<T> {
-    register: UnsafeCell<T>,
+pub struct WO<T>
+    where T: Copy
+{
+    register: VolatileCell<T>,
 }
 
 impl<T> WO<T>
     where T: Copy
 {
-    /// Uninterruptible if `T` is a word, halfword or byte
+    /// Writes `value` into the register
+    ///
+    /// NOTE: `unsafe` because writes to a register are side effectful
     #[inline(always)]
-    pub fn write(&self, value: T) {
-        unsafe { ptr::write_volatile(self.register.get(), value) }
+    pub unsafe fn write(&self, value: T) {
+        self.register.set(value)
     }
 }
-
-unsafe impl<T> Sync for WO<T> where T: Sync {}
