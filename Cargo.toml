@@ -13,3 +13,19 @@ version = "0.2.0"
 
 [dependencies]
 vcell = "0.1.0"
+
+[package.metadata.docs.rs]
+targets = [
+	"x86_64-unknown-linux-gnu",
+	"x86_64-apple-darwin",
+	"x86_64-pc-windows-msvc",
+	"i686-unknown-linux-gnu",
+	"i686-pc-windows-msvc",
+	"thumbv8m.main-none-eabihf",
+    "thumbv6m-none-eabi",
+    "thumbv7em-none-eabi",
+    "thumbv7em-none-eabihf",
+    "thumbv7m-none-eabi",
+    "thumbv8m.base-none-eabi",
+    "thumbv8m.main-none-eabi",
+]
