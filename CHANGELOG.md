@@ -7,15 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- Added `#[repr(transparent)]` to `RO`, `RW`, and `WO` to ensure ABI
+  compatibility with underlying register.
+
 ## [v0.2.1] - 2021-08-14
 
 ### Added
 
 - Added more docs.rs targets
-
-## [v0.2.0] - 2017-03-07
-
-### Changed
 
 - The `modify` and `write` operations now take `&self`.
 

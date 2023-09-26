@@ -33,6 +33,7 @@ extern crate vcell;
 use vcell::VolatileCell;
 
 /// Read-Only register
+#[repr(transparent)]
 pub struct RO<T>
     where T: Copy
 {
@@ -50,6 +51,7 @@ impl<T> RO<T>
 }
 
 /// Read-Write register
+#[repr(transparent)]
 pub struct RW<T>
     where T: Copy
 {
@@ -85,6 +87,7 @@ impl<T> RW<T>
 }
 
 /// Write-Only register
+#[repr(transparent)]
 pub struct WO<T>
     where T: Copy
 {
