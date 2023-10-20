@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [v0.2.1] - 2023-10-20
+
 ### Changed
 
 - Added `#[repr(transparent)]` to `RO`, `RW`, and `WO` to ensure ABI
@@ -45,7 +47,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Read-Only (`RO`), Read-Write (`RW`) and Write-Only (`WO`) registers
 
-[Unreleased]: https://github.com/rust-embedded/volatile-register/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/rust-embedded/volatile-register/compare/v0.2.1...HEAD
+[v0.2.1]: https://github.com/rust-embedded/volatile-register/compare/v0.2.0...v0.2.1
 [v0.2.0]: https://github.com/rust-embedded/volatile-register/compare/v0.1.2...v0.2.0
 [v0.1.2]: https://github.com/rust-embedded/volatile-register/compare/v0.1.1...v0.1.2
 [v0.1.1]: https://github.com/rust-embedded/volatile-register/compare/v0.1.0...v0.1.1

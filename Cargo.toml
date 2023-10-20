@@ -9,7 +9,7 @@ keywords = ["no-std", "volatile", "register"]
 license = "MIT OR Apache-2.0"
 name = "volatile-register"
 repository = "https://github.com/rust-embedded/volatile-register"
-version = "0.2.0"
+version = "0.2.1"
 
 [dependencies]
 vcell = "0.1.0"
