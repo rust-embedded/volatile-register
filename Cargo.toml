@@ -8,7 +8,7 @@ documentation = "https://docs.rs/volatile-register"
 keywords = ["no-std", "volatile", "register"]
 license = "MIT OR Apache-2.0"
 name = "volatile-register"
-repository = "https://github.com/japaric/volatile-register"
+repository = "https://github.com/rust-embedded/volatile-register"
 version = "0.2.1"
 
 [dependencies]
